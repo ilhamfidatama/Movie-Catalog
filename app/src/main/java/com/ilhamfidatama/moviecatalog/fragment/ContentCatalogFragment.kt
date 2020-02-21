@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.fragment_content_catalog.*
 class ContentCatalogFragment : Fragment() {
     private var menuSelected: Int = 0
     private lateinit var contextActivity: Context
+    private var contentCatalog = mutableListOf<Movie>()
 
     companion object {
         @JvmStatic
@@ -38,7 +39,8 @@ class ContentCatalogFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val contentCatalog = getContent()
+        contentCatalog.clear()
+        contentCatalog = getContent()
         listContent.layoutManager =LinearLayoutManager(contextActivity)
         listContent.adapter = MovieAdapter(contextActivity, contentCatalog)
     }
