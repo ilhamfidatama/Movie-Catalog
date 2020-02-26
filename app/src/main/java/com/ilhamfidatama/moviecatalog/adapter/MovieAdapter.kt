@@ -6,14 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ilhamfidatama.moviecatalog.DescriptionContentActivity
+import com.ilhamfidatama.moviecatalog.DescriptionMovieActivity
 import com.ilhamfidatama.moviecatalog.model.Movie
 import com.ilhamfidatama.moviecatalog.R
-import kotlinx.android.synthetic.main.layout_list_view.view.*
+import com.ilhamfidatama.moviecatalog.present.ModelPresenter
+import kotlinx.android.synthetic.main.layout_list_movie.view.*
+import kotlinx.android.synthetic.main.layout_list_movie.view.movie_title
 
-class MovieAdapter(val context: Context, private val movies: MutableList<Movie>): RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class MovieAdapter(val context: Context): RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_list_view, parent, false))
+    private var movies = arrayListOf<Movie>()
+
+    fun addData(listMovie: ArrayList<Movie>){
+        movies.clear()
+        movies.addAll(listMovie)
+        notifyDataSetChanged()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_list_movie, parent, false))
 
     override fun getItemCount(): Int = movies.size
 
@@ -24,13 +34,14 @@ class MovieAdapter(val context: Context, private val movies: MutableList<Movie>)
     inner class ViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
 
         fun bind(movie: Movie){
-            itemView.movie_title.text = movie.movie_title
-            itemView.rating_movie.text = movie.rating_movie
-            itemView.film_image.setImageResource(movie.image_movie)
+            itemView.movie_title.text = movie.title
+            itemView.rating_movie.text = movie.popularity.toString()
+            val glide = ModelPresenter().loadImage(context, movie.poster_path)
+            glide.into(itemView.film_image)
 
             itemView.setOnClickListener {
-                val intent = Intent(context, DescriptionContentActivity::class.java)
-                intent.putExtra(DescriptionContentActivity.EXTRA_MOVIE, movie)
+                val intent = Intent(context, DescriptionMovieActivity::class.java)
+                intent.putExtra(DescriptionMovieActivity.EXTRA_MOVIE, movie)
                 context.startActivity(intent)
             }
         }

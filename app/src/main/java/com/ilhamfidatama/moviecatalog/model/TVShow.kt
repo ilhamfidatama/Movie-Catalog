@@ -4,9 +4,9 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Movie (
+data class TVShow (
     var poster_path: String,
+    var popularity: Double,
     var overview: String,
-    var title: String,
-    var popularity: Double
+    var name: String
 ): Parcelable

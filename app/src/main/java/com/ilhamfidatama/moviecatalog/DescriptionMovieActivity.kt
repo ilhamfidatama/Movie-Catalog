@@ -1,15 +1,13 @@
 package com.ilhamfidatama.moviecatalog
 
-import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
-import android.view.Menu
-import android.view.MenuItem
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.ilhamfidatama.moviecatalog.model.Movie
+import com.ilhamfidatama.moviecatalog.present.ModelPresenter
 import kotlinx.android.synthetic.main.description_movie.*
 
-class DescriptionContentActivity:  AppCompatActivity() {
+class DescriptionMovieActivity:  AppCompatActivity() {
     companion object {
         const val EXTRA_MOVIE = "extra_movie"
     }
@@ -19,9 +17,12 @@ class DescriptionContentActivity:  AppCompatActivity() {
         setContentView(R.layout.description_movie)
 
         val movie = intent.getParcelableExtra(EXTRA_MOVIE) as Movie
-        image_movie.setImageResource(movie.image_movie)
-        movie_title.text = movie.movie_title
-        movie_desc.text = movie.desc_movie
-        movie_rating.text = movie.rating_movie
+        Log.w("movie", "$movie")
+//        image_movie.setImageResource(movie.image_movie)
+        movie_title.text = movie.title
+        movie_desc.text = movie.overview
+        movie_rating.text = movie.popularity.toString()
+        val glide = ModelPresenter().loadImage(this, movie.poster_path)
+        glide.into(image_movie)
     }
 }
