@@ -7,6 +7,8 @@ import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import com.ilhamfidatama.moviecatalog.adapter.MenuAdapter
+import com.orm.SugarContext
+import com.orm.SugarDb
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -14,6 +16,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        SugarContext.init(applicationContext)
+        val databaseLocal = SugarDb(this)
+        databaseLocal.onCreate(databaseLocal.db)
 
         val menu = resources.getStringArray(R.array.menu_catalog)
         var menuAdapter = MenuAdapter(this, menu, supportFragmentManager)

@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class TVShow (
+    var id: Int,
     var poster_path: String,
     var popularity: Double,
     var overview: String,

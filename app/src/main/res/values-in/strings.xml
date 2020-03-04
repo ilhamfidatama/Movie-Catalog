@@ -6,8 +6,12 @@
     <string-array name="menu_catalog">
         <item> Film </item>
         <item> Serial TV </item>
+        <item> Film Favorit </item>
+        <item> TV Favorit </item>
     </string-array>
 
     <string name="language_api">id</string>
+    <string name="save_favorite">Simpan Sebagai Favorit</string>
+    <string name="discard_favorite">Hapus Dari Favorit</string>
 
 </resources>

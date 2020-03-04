@@ -6,6 +6,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.ilhamfidatama.moviecatalog.fragment.ContentMovieFragment
 import com.ilhamfidatama.moviecatalog.fragment.ContentTVShowFragment
+import com.ilhamfidatama.moviecatalog.fragment.FavoriteMovieFragment
+import com.ilhamfidatama.moviecatalog.fragment.FavoriteTVFragment
 
 class MenuAdapter(private val context: Context, private val menu: Array<String>, fragmentManager: FragmentManager): FragmentPagerAdapter(fragmentManager) {
 
@@ -14,6 +16,8 @@ class MenuAdapter(private val context: Context, private val menu: Array<String>,
         when(position){
             0 -> fragment = ContentMovieFragment()
             1 -> fragment = ContentTVShowFragment()
+            2 -> fragment = FavoriteMovieFragment()
+            3 -> fragment = FavoriteTVFragment()
         }
         return fragment
     }

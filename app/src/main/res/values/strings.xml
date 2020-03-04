@@ -8,8 +8,12 @@
     <string-array name="menu_catalog">
         <item> Movie </item>
         <item> TV Series </item>
+        <item> Favorite Movie </item>
+        <item> Favorite TV </item>
     </string-array>
 
     <string name="language_api">en-US</string>
+    <string name="save_favorite">Save to Favorite</string>
+    <string name="discard_favorite">Discard from Favorite</string>
 
 </resources>
