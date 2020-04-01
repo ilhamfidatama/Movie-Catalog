@@ -6,12 +6,31 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ilhamfidatama.moviecatalog.adapter.MenuAdapter
 import com.orm.SugarContext
 import com.orm.SugarDb
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private val navigationListener = BottomNavigationView.OnNavigationItemSelectedListener {
+        when(it.itemId){
+            R.id.movie -> {
+                contentApp.currentItem = 0
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.tv -> {
+                contentApp.currentItem = 1
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.fav -> {
+                contentApp.currentItem = 2
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,10 +40,12 @@ class MainActivity : AppCompatActivity() {
         val databaseLocal = SugarDb(this)
         databaseLocal.onCreate(databaseLocal.db)
 
-        val menu = resources.getStringArray(R.array.menu_catalog)
-        var menuAdapter = MenuAdapter(this, menu, supportFragmentManager)
+        val menu = resources.getStringArray(R.array.home_menu)
+        val menuAdapter = MenuAdapter(menu, supportFragmentManager)
         contentApp.adapter = menuAdapter
-        tabsMenu.setupWithViewPager(contentApp)
+
+        val bottomNav = findViewById<BottomNavigationView>(R.id.tabsMenu)
+        bottomNav.setOnNavigationItemSelectedListener(navigationListener)
 
         supportActionBar?.elevation = 0f
     }

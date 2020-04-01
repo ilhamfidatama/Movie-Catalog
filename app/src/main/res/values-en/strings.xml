@@ -3,15 +3,22 @@
 
     <string name="language_setting">Language Setting</string>
 
-    <string-array name="menu_catalog">
+    <string-array name="home_menu">
         <item> Movie </item>
         <item> TV Series </item>
-        <item> Favorite Movie </item>
-        <item> Favorite TV </item>
+        <item> Favorite </item>
     </string-array>
 
     <string name="language_api">en-US</string>
     <string name="save_favorite">Save to Favorite</string>
     <string name="discard_favorite">Discard from Favorite</string>
 
+    <string name="menu_movie">Movie</string>
+    <string name="menu_tv">TV Series</string>
+    <string name="menu_fav">Favorite</string>
+
+    <string-array name="fav_menu">
+        <item>Favorite Movie</item>
+        <item>Favorite TV Series</item>
+    </string-array>
 </resources>

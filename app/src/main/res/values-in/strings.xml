@@ -3,15 +3,22 @@
 
     <string name="language_setting">Pengaturan Bahasa</string>
 
-    <string-array name="menu_catalog">
+    <string-array name="home_menu">
         <item> Film </item>
         <item> Serial TV </item>
-        <item> Film Favorit </item>
-        <item> TV Favorit </item>
+        <item> Favorit </item>
     </string-array>
 
     <string name="language_api">id</string>
     <string name="save_favorite">Simpan Sebagai Favorit</string>
     <string name="discard_favorite">Hapus Dari Favorit</string>
 
+    <string name="menu_movie">Film</string>
+    <string name="menu_tv">Serial TV</string>
+    <string name="menu_fav">Favorit</string>
+
+    <string-array name="fav_menu">
+        <item>Film Favorit</item>
+        <item>Serial TV Favorit</item>
+    </string-array>
 </resources>

@@ -4,25 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabsMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabBackground="@color/colorPrimary"
-        app:tabGravity="fill"
-        app:tabIndicatorFullWidth="true"
-        app:tabIndicatorHeight="4dp"
-        app:tabMode="fixed">
-
-    </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/contentApp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tabsMenu" />
+        android:layout_above="@id/tabsMenu" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/tabsMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="@color/design_default_color_surface"
+        app:itemHorizontalTranslationEnabled="true"
+        app:menu="@menu/main_menu" />
 
 </RelativeLayout>
