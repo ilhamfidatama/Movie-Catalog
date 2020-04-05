@@ -17,6 +17,8 @@
     <string name="menu_tv">Serial TV</string>
     <string name="menu_fav">Favorit</string>
     <string name="search">Cari</string>
+    <string name="reminder_setting">Pengaturan Pengingat</string>
+    <string name="notif_group_tittle">Pemberitahuan</string>
 
     <string-array name="fav_menu">
         <item>Film Favorit</item>

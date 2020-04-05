@@ -17,6 +17,8 @@
     <string name="menu_tv">TV Series</string>
     <string name="menu_fav">Favorite</string>
     <string name="search">Search</string>
+    <string name="reminder_setting">Reminder Setting</string>
+    <string name="notif_group_tittle">Notification</string>
 
     <string-array name="fav_menu">
         <item>Favorite Movie</item>

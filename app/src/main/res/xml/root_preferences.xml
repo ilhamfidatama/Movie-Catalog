@@ -1,0 +1,17 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/notif_group_tittle">
+
+        <SwitchPreferenceCompat
+            app:key="remind_me"
+            app:title="Remind Me Every Day at 7 AM" />
+
+        <SwitchPreferenceCompat
+            app:key="updated"
+            app:summaryOff="Anda tidak akan mendapatkan update seputar film atau tv series terbaru"
+            app:summaryOn="Anda akan mendapatkan update seputar film atau tv series terbaru"
+            app:title="Give Me Updated" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
