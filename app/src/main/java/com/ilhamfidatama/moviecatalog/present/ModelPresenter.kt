@@ -19,7 +19,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ModelPresenter(): ViewModel() {
+class ModelPresenter: ViewModel() {
     private val API_KEY = "a67d7e32992cae36c71dcc2c701e1c00"
     private val API_SERVICE = Api.create()
     private var listMovie = MutableLiveData<ArrayList<Movie>>()
@@ -28,7 +28,7 @@ class ModelPresenter(): ViewModel() {
     fun getMovie(language: String){
         API_SERVICE.getMovie(API_KEY, language).enqueue(object : Callback<BaseResponseMovie>{
             override fun onFailure(call: Call<BaseResponseMovie>, t: Throwable) {
-                Log.e("load-movie", t.message)
+                Log.e("load-movie", "${t.message}")
             }
 
             override fun onResponse(
@@ -43,7 +43,7 @@ class ModelPresenter(): ViewModel() {
     fun getTVShow(language: String){
         API_SERVICE.getTVShow(API_KEY, language).enqueue(object : Callback<BaseResponseTV>{
             override fun onFailure(call: Call<BaseResponseTV>, t: Throwable) {
-                Log.e("load-tvShow", t.message)
+                Log.e("load-tvShow", "${t.message}")
             }
 
             override fun onResponse(
@@ -52,6 +52,38 @@ class ModelPresenter(): ViewModel() {
             ) {
                 processDataTVShow(response.body())
             }
+        })
+    }
+
+    fun searchMovie(query: String, language: String){
+        API_SERVICE.searchMovie(API_KEY, query, language).enqueue(object : Callback<BaseResponseMovie>{
+            override fun onFailure(call: Call<BaseResponseMovie>, t: Throwable) {
+                Log.e("search-movie", "${t.message}")
+            }
+
+            override fun onResponse(
+                call: Call<BaseResponseMovie>,
+                response: Response<BaseResponseMovie>
+            ) {
+                proccessDataMovie(response.body())
+            }
+
+        })
+    }
+
+    fun searchTV(query: String, language: String){
+        API_SERVICE.searchTV(API_KEY, query, language).enqueue(object : Callback<BaseResponseTV>{
+            override fun onFailure(call: Call<BaseResponseTV>, t: Throwable) {
+                Log.e("search-tv", "${t.message}")
+            }
+
+            override fun onResponse(
+                call: Call<BaseResponseTV>,
+                response: Response<BaseResponseTV>
+            ) {
+                processDataTVShow(response.body())
+            }
+
         })
     }
 
@@ -68,11 +100,10 @@ class ModelPresenter(): ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun loadImage(context: Context, poster_path: String): RequestBuilder<Drawable>{
-        val glide = Glide.with(context)
+    fun loadImage(context: Context, poster_path: String?): RequestBuilder<Drawable>{
+        return Glide.with(context)
             .load("https://image.tmdb.org/t/p/w185$poster_path")
             .apply(RequestOptions().override(130,200))
-        return glide
     }
 
     fun getListMovie(): LiveData<ArrayList<Movie>> = listMovie

@@ -12,13 +12,24 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ilhamfidatama.moviecatalog.R
 import com.ilhamfidatama.moviecatalog.adapter.TVShowAdapter
+import com.ilhamfidatama.moviecatalog.helper.SearchHelper
+import com.ilhamfidatama.moviecatalog.helper.SearchUpdateHelper
+import com.ilhamfidatama.moviecatalog.helper.SearchUpdateListener
 import com.ilhamfidatama.moviecatalog.present.ContentPresenter
 import com.ilhamfidatama.moviecatalog.present.ModelPresenter
 import kotlinx.android.synthetic.main.fragment_content_catalog.*
 
-class ContentTVShowFragment: Fragment() {
+class ContentTVShowFragment: Fragment(), SearchUpdateListener {
+
     private lateinit var contextActivity: Context
     private lateinit var adapter: TVShowAdapter
+    var searchHelper: SearchHelper? = null
+
+    override fun update() {
+        searchHelper?.let {
+            getTVShow(it.getSearchQuery())
+        }
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -39,27 +50,45 @@ class ContentTVShowFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.w("bug", "tv show fragment")
-        setProgressBar(true)
         adapter = TVShowAdapter(contextActivity)
         adapter.notifyDataSetChanged()
         listContent.layoutManager = LinearLayoutManager(context)
         listContent.adapter = adapter
-        getTVShow()
+        getTVShow(null)
     }
 
-    fun getTVShow(){
+    private fun getTVShow(search: String?){
+        adapter.addData(null)
+        setProgressBar(true)
         val tvModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(ModelPresenter::class.java)
-        tvModel.getTVShow(getString(R.string.language_api))
-        tvModel.getListTV().observe(this, Observer {
-            it?.let {
-                adapter.addData(it)
-                setProgressBar(false)
-            }
-        })
+        if (search.isNullOrEmpty()){
+            tvModel.getTVShow(getString(R.string.language_api))
+            tvModel.getListTV().observe(this, Observer {
+                it?.let {
+                    adapter.addData(it)
+                    setProgressBar(false)
+                }
+            })
+        }else{
+            tvModel.searchTV(search, getString(R.string.language_api))
+            tvModel.getListTV().observe(this, Observer {
+                it?.let {
+                    adapter.addData(it)
+                    setProgressBar(false)
+                }
+            })
+        }
     }
 
     private fun setProgressBar(show: Boolean){
         ContentPresenter().setProgressBar(progressBar, show)
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        if (isVisibleToUser){
+            Log.e("visible", "tv")
+            SearchUpdateHelper.addListener(this)
+        }
+        super.setUserVisibleHint(isVisibleToUser)
     }
 }

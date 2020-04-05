@@ -16,6 +16,7 @@
     <string name="menu_movie">Film</string>
     <string name="menu_tv">Serial TV</string>
     <string name="menu_fav">Favorit</string>
+    <string name="search">Cari</string>
 
     <string-array name="fav_menu">
         <item>Film Favorit</item>

@@ -1,13 +1,17 @@
 package com.ilhamfidatama.moviecatalog
 
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.widget.SearchView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ilhamfidatama.moviecatalog.adapter.MenuAdapter
+import com.ilhamfidatama.moviecatalog.helper.Searching
 import com.orm.SugarContext
 import com.orm.SugarDb
 import kotlinx.android.synthetic.main.activity_main.*
@@ -51,8 +55,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.language_menu, menu)
-        return super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.option_menu, menu)
+
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val btnSearch = menu?.findItem(R.id.search)?.actionView as SearchView
+        btnSearch.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        btnSearch.queryHint = resources.getString(R.string.search)
+        btnSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                Searching.addQuery(query)
+                return true
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                return false
+            }
+        })
+
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

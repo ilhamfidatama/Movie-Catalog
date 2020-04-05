@@ -17,9 +17,9 @@ class MovieAdapter(val context: Context): RecyclerView.Adapter<MovieAdapter.View
 
     private var movies = arrayListOf<Movie>()
 
-    fun addData(listMovie: ArrayList<Movie>){
+    fun addData(listMovie: ArrayList<Movie>?){
         movies.clear()
-        movies.addAll(listMovie)
+        listMovie?.let { movies.addAll(it) }
         notifyDataSetChanged()
     }
 

@@ -17,9 +17,9 @@ class TVShowAdapter(val context: Context): RecyclerView.Adapter<TVShowAdapter.Vi
 
     private var listTVShow = arrayListOf<TVShow>()
 
-    fun addData(data: ArrayList<TVShow>){
+    fun addData(data: ArrayList<TVShow>?){
         listTVShow.clear()
-        listTVShow.addAll(data)
+        data?.let { listTVShow.addAll(it) }
         notifyDataSetChanged()
     }
 

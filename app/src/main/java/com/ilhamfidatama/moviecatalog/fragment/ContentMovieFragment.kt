@@ -12,13 +12,24 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ilhamfidatama.moviecatalog.R
 import com.ilhamfidatama.moviecatalog.adapter.MovieAdapter
+import com.ilhamfidatama.moviecatalog.helper.SearchHelper
+import com.ilhamfidatama.moviecatalog.helper.SearchUpdateHelper
+import com.ilhamfidatama.moviecatalog.helper.SearchUpdateListener
 import com.ilhamfidatama.moviecatalog.present.ContentPresenter
 import com.ilhamfidatama.moviecatalog.present.ModelPresenter
 import kotlinx.android.synthetic.main.fragment_content_catalog.*
 
-class ContentMovieFragment : Fragment() {
+class ContentMovieFragment : Fragment(), SearchUpdateListener {
+
     private lateinit var contextActivity: Context
     private lateinit var adapter: MovieAdapter
+    var searchHelper: SearchHelper? = null
+
+    override fun update() {
+        searchHelper?.let {
+            getMovie(it.getSearchQuery())
+        }
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -31,25 +42,36 @@ class ContentMovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setProgressBar(true)
-        Log.w("bug", "movie fragment")
         adapter = MovieAdapter(contextActivity)
         adapter.notifyDataSetChanged()
         listContent.setHasFixedSize(true)
         listContent.layoutManager =LinearLayoutManager(contextActivity)
         listContent.adapter = adapter
-        getMovie()
+        getMovie(null)
     }
 
-    private fun getMovie(){
+    private fun getMovie(search: String?){
+        adapter.addData(null)
+        setProgressBar(true)
         val movieModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(ModelPresenter::class.java)
-        movieModel.getMovie(getString(R.string.language_api))
-        movieModel.getListMovie().observe(this, Observer {
-            it?.let {
-                adapter.addData(it)
-                setProgressBar(false)
-            }
-        })
+        if (search.isNullOrEmpty()){
+            movieModel.getMovie(getString(R.string.language_api))
+            movieModel.getListMovie().observe(this, Observer {
+                it?.let {
+                    adapter.addData(it)
+                    setProgressBar(false)
+                }
+            })
+        }else{
+            movieModel.searchMovie(search, getString(R.string.language_api))
+            movieModel.getListMovie().observe(this, Observer {
+                it?.let {
+                    adapter.addData(it)
+                    setProgressBar(false)
+                }
+            })
+        }
+
     }
 
     override fun onCreateView(
@@ -61,5 +83,13 @@ class ContentMovieFragment : Fragment() {
 
     private fun setProgressBar(show: Boolean){
         ContentPresenter().setProgressBar(progressBar, show)
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        if (isVisibleToUser){
+            Log.e("visible", "movie")
+            SearchUpdateHelper.addListener(this)
+        }
+        super.setUserVisibleHint(isVisibleToUser)
     }
 }

@@ -11,4 +11,14 @@ interface TheMovieDBService {
 
     @GET("3/discover/tv")
     fun getTVShow(@Query("api_key") api_key: String, @Query("language") language: String): Call<BaseResponseTV>
+
+    @GET("3/search/movie")
+    fun searchMovie(@Query("api_key") api_key: String,
+                    @Query("query") query: String,
+                    @Query("language") language: String): Call<BaseResponseMovie>
+
+    @GET("3/search/tv")
+    fun searchTV(@Query("api_key") api_key: String,
+                 @Query("query") query: String,
+                 @Query("language") language: String): Call<BaseResponseTV>
 }
