@@ -2,6 +2,8 @@
 <resources>
 
     <string name="language_setting">Pengaturan Bahasa</string>
+    <string name="notification_message">Kami Merindukanmu!</string>
+    <string name="release_tittle">Rilis Film Terbaru</string>
 
     <string-array name="home_menu">
         <item> Film </item>

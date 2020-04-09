@@ -44,6 +44,10 @@
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="com.ilhamfidatama" />
+
+        <receiver android:name=".receivers.NotifReceiver"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>

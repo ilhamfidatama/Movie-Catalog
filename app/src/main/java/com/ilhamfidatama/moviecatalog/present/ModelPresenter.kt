@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.request.RequestOptions
+import com.ilhamfidatama.moviecatalog.BuildConfig
 import com.ilhamfidatama.moviecatalog.api.Api
 import com.ilhamfidatama.moviecatalog.api.service.BaseResponseMovie
 import com.ilhamfidatama.moviecatalog.api.service.BaseResponseTV
@@ -20,7 +21,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ModelPresenter: ViewModel() {
-    private val API_KEY = "a67d7e32992cae36c71dcc2c701e1c00"
+    private val API_KEY = BuildConfig.API_KEY
     private val API_SERVICE = Api.create()
     private var listMovie = MutableLiveData<ArrayList<Movie>>()
     private var listTVSShow = MutableLiveData<ArrayList<TVShow>>()
@@ -50,7 +51,7 @@ class ModelPresenter: ViewModel() {
                 call: Call<BaseResponseTV>,
                 response: Response<BaseResponseTV>
             ) {
-                processDataTVShow(response.body())
+                proccessDataTVShow(response.body())
             }
         })
     }
@@ -81,7 +82,7 @@ class ModelPresenter: ViewModel() {
                 call: Call<BaseResponseTV>,
                 response: Response<BaseResponseTV>
             ) {
-                processDataTVShow(response.body())
+                proccessDataTVShow(response.body())
             }
 
         })
@@ -93,7 +94,7 @@ class ModelPresenter: ViewModel() {
         }
     }
 
-    fun processDataTVShow(data: BaseResponseTV?){
+    fun proccessDataTVShow(data: BaseResponseTV?){
         data?.results.let {
             listTVSShow.postValue(it)
         }

@@ -3,11 +3,11 @@
     <PreferenceCategory app:title="@string/notif_group_tittle">
 
         <SwitchPreferenceCompat
-            app:key="remind_me"
+            app:key="@string/reminder_key"
             app:title="Remind Me Every Day at 7 AM" />
 
         <SwitchPreferenceCompat
-            app:key="updated"
+            app:key="@string/release_key"
             app:summaryOff="Anda tidak akan mendapatkan update seputar film atau tv series terbaru"
             app:summaryOn="Anda akan mendapatkan update seputar film atau tv series terbaru"
             app:title="Give Me Updated" />

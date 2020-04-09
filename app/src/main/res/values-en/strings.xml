@@ -2,6 +2,8 @@
 <resources>
 
     <string name="language_setting">Language Setting</string>
+    <string name="notification_message">We missed you!</string>
+    <string name="release_tittle">Update Movie Release</string>
 
     <string-array name="home_menu">
         <item> Movie </item>

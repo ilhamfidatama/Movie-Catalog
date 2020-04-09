@@ -3,7 +3,12 @@
     <string name="movie_title" translatable="false">Movie Title</string>
     <string name="rating" translatable="false">7.0/10</string>
     <string name="movie_desc" translatable="false">Description of Movie</string>
+    <string name="daily_notif" translatable="false">Daily Notification</string>
+    <string name="release_notif" translatable="false">Release Notification</string>
+    <string name="reminder_key" translatable="false">remind_me</string>
+    <string name="release_key" translatable="false">update_me</string>
     <string name="language_setting">Language Setting</string>
+    <string name="notification_message">We missed you!</string>
 
     <string-array name="home_menu">
         <item> Movie </item>
@@ -14,7 +19,7 @@
     <string name="language_api">en-US</string>
     <string name="save_favorite">Save to Favorite</string>
     <string name="discard_favorite">Discard from Favorite</string>
-
+    <string name="release_tittle">Update Movie Release</string>
     <string name="menu_movie">Movie</string>
     <string name="menu_tv">TV Series</string>
     <string name="menu_fav">Favorite</string>
