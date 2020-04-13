@@ -31,4 +31,5 @@
         <item>Favorite Movie</item>
         <item>Favorite TV Series</item>
     </string-array>
+    <string name="empty_data">No Data</string>
 </resources>

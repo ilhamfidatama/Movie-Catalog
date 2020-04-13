@@ -26,4 +26,5 @@
         <item>Film Favorit</item>
         <item>Serial TV Favorit</item>
     </string-array>
+    <string name="empty_data">Tidak Ada Data</string>
 </resources>

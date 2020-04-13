@@ -12,6 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver android:name=".FavoriteMovieWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/favorite_movie_widget_info" />
+        </receiver>
+
+        <service android:name=".adapter.FavMovieWidgetAdapter"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/reminder_setting"
@@ -45,7 +57,8 @@
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="com.ilhamfidatama" />
 
-        <receiver android:name=".receivers.NotifReceiver"
+        <receiver
+            android:name=".receivers.NotifReceiver"
             android:enabled="true"
             android:exported="false" />
     </application>
